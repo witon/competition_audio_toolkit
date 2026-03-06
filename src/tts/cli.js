@@ -8,12 +8,15 @@ import { runBatch } from './runner.js';
 
 const argv = yargs(hideBin(process.argv))
   .scriptName('tts-gen')
-  .usage('$0 --in <file.json> --out <dir>')
+  .usage('$0 --in <file.json> --out <dir> | --text "一句话" --out <dir>')
   .option('in', {
     alias: 'i',
     type: 'string',
-    demandOption: true,
     describe: 'Input JSON file. Supported: array of strings OR array of objects with { id?, text }',
+  })
+  .option('text', {
+    type: 'string',
+    describe: 'Single text input (bypass JSON file). When set, --in is ignored.',
   })
   .option('out', {
     alias: 'o',
@@ -68,20 +71,31 @@ const argv = yargs(hideBin(process.argv))
     default: 'edge-tts',
     describe: 'edge-tts executable (in PATH). Install: pipx install edge-tts or pip install edge-tts',
   })
+  .check((args) => {
+    if (!args.in && !args.text) {
+      throw new Error('Either --in or --text is required');
+    }
+    return true;
+  })
   .help()
   .strict()
   .parse();
 
-const inputPath = path.resolve(argv.in);
 const outDir = path.resolve(argv.out);
 
-const raw = await fs.readFile(inputPath, 'utf8');
 let payload;
-try {
-  payload = JSON.parse(raw);
-} catch (e) {
-  console.error(`Failed to parse JSON: ${inputPath}`);
-  process.exit(2);
+if (argv.text) {
+  // 单句模式：payload 就是一条字符串数组
+  payload = [String(argv.text)];
+} else {
+  const inputPath = path.resolve(argv.in);
+  const raw = await fs.readFile(inputPath, 'utf8');
+  try {
+    payload = JSON.parse(raw);
+  } catch (e) {
+    console.error(`Failed to parse JSON: ${inputPath}`);
+    process.exit(2);
+  }
 }
 
 const { results, manifest } = await runBatch({
