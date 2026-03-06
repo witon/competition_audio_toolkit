@@ -1,0 +1,25 @@
+{
+  "name": "competition-audio-toolkit",
+  "version": "0.1.0",
+  "description": "Unified CLI toolkit for TTS generation, audio trimming and merging.",
+  "type": "module",
+  "bin": {
+    "tts-gen": "./src/tts/cli.js",
+    "audio-trim": "./src/trim/cli.js",
+    "audio-merge": "./src/merge/cli.js"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "keywords": ["audio", "tts", "ffmpeg", "cli"],
+  "license": "MIT",
+  "dependencies": {
+    "ffmpeg-static": "^5.3.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "p-limit": "^7.3.0",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.18"
+  }
+}
