@@ -170,6 +170,8 @@ audio-merge \
 npm run check
 ```
 
+测试文件统一放在项目根目录 `test/` 下（不再细分子目录）。
+
 也可以分开执行：
 
 ```bash
