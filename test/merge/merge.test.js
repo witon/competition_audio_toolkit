@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { resolveOutputOptions } from './merge.js';
+import { resolveOutputOptions } from '../../src/merge/merge.js';
 
 describe('merge/resolveOutputOptions', () => {
   it('returns mp3 options by default', () => {
