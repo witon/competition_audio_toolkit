@@ -9,7 +9,9 @@
     "audio-merge": "./src/merge/cli.js"
   },
   "scripts": {
-    "test": "vitest run"
+    "lint": "node --check src/**/*.js",
+    "test": "vitest run",
+    "check": "npm run lint && npm test"
   },
   "keywords": ["audio", "tts", "ffmpeg", "cli"],
   "license": "MIT",
