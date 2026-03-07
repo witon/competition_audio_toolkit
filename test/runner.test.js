@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import crypto from 'node:crypto';
-import { sanitizeBaseName } from '../../src/shared/fs.js';
+import { sanitizeBaseName } from '../src/shared/fs.js';
 
 // 复制 runner.js 中的纯函数逻辑来测试输入规范和命名规则
 function normalizeInput(input) {
