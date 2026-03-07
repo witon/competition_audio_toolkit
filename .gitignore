@@ -1,3 +1,13 @@
-node_modules
+node_modules/
+*.log
 .DS_Store
-npm-debug.log*
+
+# generated audio outputs
+out/
+out_*/
+trimmed/
+merged.*
+
+# temp/cache
+.tmp/
+tmp/

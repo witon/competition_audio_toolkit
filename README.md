@@ -164,10 +164,17 @@ audio-merge \
 
 ## 开发与测试
 
-本地开发时可以直接运行测试：
+本地开发建议先跑完整检查：
 
 ```bash
+npm run check
+```
+
+也可以分开执行：
+
+```bash
+npm run lint
 npm test
 ```
 
-仓库自带 GitHub Actions CI（`.github/workflows/ci.yml`），在 `master/main` 分支的 push 和 PR 上会自动运行 `npm test`。
+仓库自带 GitHub Actions CI（`.github/workflows/ci.yml`），在 `master/main` 分支的 push 和 PR 上会自动运行 lint + test。
